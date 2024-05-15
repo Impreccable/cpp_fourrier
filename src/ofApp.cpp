@@ -34,7 +34,7 @@ void ofApp::setup() {
   soundStream.printDeviceList();
 
   //settings audio initiaux La4
-  octave = 4;
+  int octave = 4;
   //frequence_pitch = 440;
   //pitch = 57;
 
@@ -45,7 +45,7 @@ void ofApp::setup() {
   //++++
   f=440;
   op=2;
-  brillance=40;
+  int brillance=40;
  
   
   //int scintillance=20;
@@ -291,10 +291,11 @@ ofSetLineWidth(3);
 string reportString = "volume: (" + ofToString(volume, 2) +
                       ") modify with -/+ keys\npan: (" + ofToString(pan, 2) +
                       ") modify with mouse x\nbrillance: (" + ofToString(brillance, 2) +
-                      ") modify with m/n keys\nsynthesis: (";
+                      ") modify with m/n \noctave: (" + ofToString(octave, 2) +
+                      ") modify with )/n keys\nsynthesis: (";
 if (!bNoise) {
-  reportString += "sine wave (" + ofToString(frequence_pitch, 2) +
-                  "hz) modify with mouse y\n";
+  reportString += "Frequancy (" + ofToString(frequence_pitch, 2) +
+                  "hz) modify with keyboard";
 } else {
   reportString += "noise";
 }
@@ -349,10 +350,10 @@ for(int i = 0; i < numKeys; i++) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-  if (key == '-' || key == '_') {
+  if (key == '-') {
     volume -= 0.05;
     volume = MAX(volume, 0);
-  } else if (key == '+' || key == '=') {
+  } else if (key == '+') {
     volume += 0.05;
     volume = MIN(volume, 1);
   }
@@ -387,12 +388,24 @@ void ofApp::keyPressed(int key) {
   if (key == 'o'){
     omega0 = 0.1;
     quality = 0.8;
+
   if (key == 'm'){
     brillance+=1;
   }
   if (key == 'n'){
     if (brillance > 0){
       brillance-=1;
+    }
+  }
+
+  if (key == '='){
+    if (octave < 8){
+      octave+=1;
+    }
+  }
+  if (key == ')'){
+    if (octave > -1){
+      octave+=1;
     }
   }
   reset_pass_filter_coeff(x1_pass_filter, x2_pass_filter, y1_pass_filter, y2_pass_filter);
