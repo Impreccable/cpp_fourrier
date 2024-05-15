@@ -48,8 +48,13 @@ void ofApp::setup() {
 
   //++++
   f=440;
+<<<<<<< HEAD
   op=2;
   int brillance=40;
+=======
+  op=0;
+  brillance=10;
+>>>>>>> 788f85943e98392337853dc067d8c2f9f5d0c139
  
   
   //int scintillance=20;
@@ -337,7 +342,12 @@ for(int i = 0; i < numKeys; i++) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
+<<<<<<< HEAD
   if (key == '-') {
+=======
+  std::cout << key << std::endl;
+  if (key == '-' || key == '_') {
+>>>>>>> 788f85943e98392337853dc067d8c2f9f5d0c139
     volume -= 0.05;
     volume = MAX(volume, 0);
   } else if (key == '+') {
@@ -354,6 +364,32 @@ void ofApp::keyPressed(int key) {
   if (key == '/') {
     soundStream.stop();
   }
+
+// modification de brillance
+if (key == 'm'){
+    brillance+=1;
+  }
+  if (key == 'n'){
+    if (brillance > 0){
+      brillance-=1;
+    }
+  }
+// choix de type de signal
+    if (key == '0'){
+    op+=1;
+    op=op%3;
+    if (op==0){
+    name_wave.assign(" sinusoidal ");
+    }
+    else if (op==1){
+    name_wave.assign(" square ");
+    }
+    else if (op==2){
+    name_wave.assign(" sawtooth ");      
+    }
+    
+  }
+
   if (key == '1'){
     if (keyboard_ctrl_modifier){
       omega0-=0.05;
@@ -532,7 +568,7 @@ void ofApp::audioOut(ofSoundBuffer &buffer) {
           ofRandom(0, 1) * volume * rightScale;*/
     }
   } else {
-    
+  
     phaseAdder = 0.95f * phaseAdder + 0.05f * phaseAdderTarget;
     for (size_t i = 0; i < buffer.getNumFrames(); i++) {
       phase += phaseAdder;

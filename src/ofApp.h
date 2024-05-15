@@ -42,7 +42,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+
 		void audioOut(ofSoundBuffer & buffer);
 		//------ calculate the pitch
 		int keytopitch(int  octave, int note);
@@ -83,6 +83,8 @@ class ofApp : public ofBaseApp{
 		float x2_pass_filter;
 		float y1_pass_filter;
 		float y2_pass_filter;
+		float getFrequencyForKey(int key);
+
 
 		//---------- for calculate frequency from keyboard input and note
 		int octave;
@@ -94,4 +96,6 @@ class ofApp : public ofBaseApp{
 		int op;
 		float f;
 		int brillance;
+		std::string name_wave;
+
 };
