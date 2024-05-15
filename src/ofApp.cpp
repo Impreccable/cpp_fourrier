@@ -23,6 +23,7 @@ void ofApp::setup() {
 
   current_filter = 0;
   listen_pass = false;
+
   use_LPF=false;
   use_HPF=false;
 
@@ -266,6 +267,9 @@ std::vector<float> right_transform_fourier;
 right_transform_fourier = get_fourier_transform_from_signal(right_transform, sampleRate);
   
 
+right_transform = soustractive_synthese(rAudio, 2, rAudio.size(), 
+                        y1_pass_filter, y2_pass_filter, x1_pass_filter, x2_pass_filter, quality, omega0, true, use_LPF, use_HPF);
+
 //print_array_float(rAudio);
 ofSetLineWidth(1);
 ofDrawRectangle(0, 0, 430, 200);
@@ -310,7 +314,7 @@ if (!bNoise) {
   reportString += "noise";
 }
 
-  reportString += "omega_0: (" + ofToString(omega0, 2) + 
+reportString += "omega_0: (" + ofToString(omega0, 2) + 
                   ") modify with 1/ctrl+1 keys\nquality: (" + ofToString(quality, 2) +
                   "modify with 4/ctrl+4 keys\nFilter configuration: LPF:" + 
                   ofToString(use_LPF) + " HPF: " + ofToString(use_HPF) + "modify with 3";
@@ -362,6 +366,7 @@ for(int i = 0; i < numKeys; i++) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
   //std::cout << key << std::endl;
+
   if (key == '-' || key == '_') {
 >>>>>>> 788f85943e98392337853dc067d8c2f9f5d0c139
     volume -= 0.05;
@@ -438,6 +443,7 @@ if (key == 'm'){
   if (key == '5'){
     listen_pass = true;
   }
+
   if (key == '3'){
     current_filter+=1;
     int id = current_filter%4;
@@ -508,9 +514,11 @@ void ofApp::keyReleased(int key) {
   if (key == 3682){
     keyboard_ctrl_modifier = false;
   }
+
   if (key == '5'){
     listen_pass = false;
   }
+
 }
 
 //--------------------------------------------------------------
